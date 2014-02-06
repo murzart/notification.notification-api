@@ -244,8 +244,6 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 			return this;
 		}-*/;
 
-		// public native NotificationOptions dir(NotificationDirection dir)/*-{
-
 		/**
 		 * @param dir
 		 *            The direction used by the notification as defined within
@@ -254,7 +252,6 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 		 */
 		public native final NotificationOptions dir(String dir)/*-{
 			this.dir = dir;
-			console.log(this);
 			return this;
 		}-*/;
 
