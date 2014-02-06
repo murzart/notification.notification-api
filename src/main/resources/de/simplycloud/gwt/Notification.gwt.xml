@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='notification'>
+
+	<inherits name="com.google.gwt.event.Event" />
+
+	<source path='client' />
+</module>
