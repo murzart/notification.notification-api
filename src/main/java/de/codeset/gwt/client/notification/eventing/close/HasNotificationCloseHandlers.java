@@ -1,9 +1,13 @@
-package de.simplycloud.gwt.client.notification.eventing.close;
+package de.codeset.gwt.client.notification.eventing.close;
 
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
 /**
+ * @author MarZl 
+ *
+ * @see <a href="https://github.com/MarZl/notification-api">https://github.com/MarZl/notification-api</a>
+ * 
  * A widget that implements this interface provides registration for
  * {@link NotificationCloseHandler} instances.
  */

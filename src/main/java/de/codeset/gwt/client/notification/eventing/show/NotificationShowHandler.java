@@ -1,8 +1,12 @@
-package de.simplycloud.gwt.client.notification.eventing.show;
+package de.codeset.gwt.client.notification.eventing.show;
 
 import com.google.gwt.event.shared.EventHandler;
 
 /**
+ * @author MarZl 
+ *
+ * @see <a href="https://github.com/MarZl/notification-api">https://github.com/MarZl/notification-api</a>
+ * 
  * Handler for {@link NotificationShowEvent} events.
  */
 public interface NotificationShowHandler extends EventHandler {

@@ -1,5 +1,11 @@
-package de.simplycloud.gwt.client.notification;
+package de.codeset.gwt.client.notification;
 
+/**
+ * @author MarZl 
+ *
+ * @see <a href="https://github.com/MarZl/notification-api">https://github.com/MarZl/notification-api</a>
+ * 
+ */
 public enum NotificationPermission {
 	GRANTED, DENIED, DEFAULT;
 

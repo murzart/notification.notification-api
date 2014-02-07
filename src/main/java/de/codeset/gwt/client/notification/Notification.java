@@ -1,4 +1,4 @@
-package de.simplycloud.gwt.client.notification;
+package de.codeset.gwt.client.notification;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.shared.EventHandler;
@@ -6,24 +6,23 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
 
-import de.simplycloud.gwt.client.notification.eventing.click.HasNotificationClickHandlers;
-import de.simplycloud.gwt.client.notification.eventing.click.NotificationClickEvent;
-import de.simplycloud.gwt.client.notification.eventing.click.NotificationClickHandler;
-import de.simplycloud.gwt.client.notification.eventing.close.HasNotificationCloseHandlers;
-import de.simplycloud.gwt.client.notification.eventing.close.NotificationCloseEvent;
-import de.simplycloud.gwt.client.notification.eventing.close.NotificationCloseHandler;
-import de.simplycloud.gwt.client.notification.eventing.error.HasNotificationErrorHandlers;
-import de.simplycloud.gwt.client.notification.eventing.error.NotificationErrorEvent;
-import de.simplycloud.gwt.client.notification.eventing.error.NotificationErrorHandler;
-import de.simplycloud.gwt.client.notification.eventing.show.HasNotificationShowHandlers;
-import de.simplycloud.gwt.client.notification.eventing.show.NotificationShowEvent;
-import de.simplycloud.gwt.client.notification.eventing.show.NotificationShowHandler;
+import de.codeset.gwt.client.notification.eventing.click.HasNotificationClickHandlers;
+import de.codeset.gwt.client.notification.eventing.click.NotificationClickEvent;
+import de.codeset.gwt.client.notification.eventing.click.NotificationClickHandler;
+import de.codeset.gwt.client.notification.eventing.close.HasNotificationCloseHandlers;
+import de.codeset.gwt.client.notification.eventing.close.NotificationCloseEvent;
+import de.codeset.gwt.client.notification.eventing.close.NotificationCloseHandler;
+import de.codeset.gwt.client.notification.eventing.error.HasNotificationErrorHandlers;
+import de.codeset.gwt.client.notification.eventing.error.NotificationErrorEvent;
+import de.codeset.gwt.client.notification.eventing.error.NotificationErrorHandler;
+import de.codeset.gwt.client.notification.eventing.show.HasNotificationShowHandlers;
+import de.codeset.gwt.client.notification.eventing.show.NotificationShowEvent;
+import de.codeset.gwt.client.notification.eventing.show.NotificationShowHandler;
 
 /**
- * @author MarZl
+ * @author MarZl 
  *
  * @see <a href="https://github.com/MarZl/notification-api">https://github.com/MarZl/notification-api</a>
- * 
  * 
  */
 public class Notification implements HasNotificationClickHandlers, HasNotificationErrorHandlers, HasNotificationShowHandlers, HasNotificationCloseHandlers {
@@ -165,10 +164,9 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 		}-*/;
 
 		public native static void requestPermission(NotificationPermissionCallback callback)/*-{
-			$wnd.Notification
-					.requestPermission(function(permission) {
-						var perm = @de.simplycloud.gwt.client.notification.NotificationPermission::fromString(Ljava/lang/String;)(permission);
-						callback.@de.simplycloud.gwt.client.notification.Notification.NotificationPermissionCallback::call(Lde/simplycloud/gwt/client/notification/NotificationPermission;)(perm);
+			$wnd.Notification.requestPermission(function(permission) {
+						var perm = @de.codeset.gwt.client.notification.NotificationPermission::fromString(Ljava/lang/String;)(permission);
+						callback.@de.codeset.gwt.client.notification.Notification.NotificationPermissionCallback::call(Lde/codeset/gwt/client/notification/NotificationPermission;)(perm);
 					});
 		}-*/;
 
@@ -181,12 +179,7 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 		}-*/;
 
 		public native final void addEventListener(String event, Callback callback)/*-{
-			this
-					.addEventListener(
-							event,
-							function() {
-								callback.@de.simplycloud.gwt.client.notification.Notification.Callback::call()();
-							});
+			this.addEventListener(event, function() {callback.@de.codeset.gwt.client.notification.Notification.Callback::call()();});
 		}-*/;
 
 	}
