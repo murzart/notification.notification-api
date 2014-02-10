@@ -31,25 +31,35 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 	private HandlerManager handlerManager;
 	private boolean initHandlers;
 
-	/**
-	 * @param title
-	 *            The title that must be shown within the notification
-	 */
-	public Notification(String title) {
-		nativeNotification = NativeNotification.create(title, null);
-		initHandler();
-	}
 
+	private Notification(String title, NotificationOptions options) {
+		nativeNotification = NativeNotification.create(title, options);
+	}
+	
 	/**
+	 * Return a new Notification if supported, and null otherwise.
+	 * 
 	 * @param title
 	 *            The title that must be shown within the notification
 	 * @param options
-	 *            An object that allows to configure the notification
+	 *            (optional) An object that allows to configure the notification
 	 */
-	public Notification(String title, NotificationOptions options) {
-		nativeNotification = NativeNotification.create(title, options);
+	public static Notification createIfSupported(String title, NotificationOptions options){
+		if(isSupported())
+			return new Notification(title, options);
+		return null;
 	}
-
+	
+	
+	/**
+	 * Returns if the browser supports Notifications.
+	 * 
+	 * @return supported
+	 */
+	public static boolean isSupported(){
+		return NativeNotification.isSupported();
+	}
+	
 	/**
 	 * This method is used to ask the user if he allows the page to display
 	 * notifications.
@@ -82,13 +92,13 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 
 	// //////////
 
-	private HandlerManager ensureHandlers() {
+	protected HandlerManager ensureHandlers() {
 		if(!initHandlers)
 			initHandler();
 		return handlerManager == null ? handlerManager = new HandlerManager(this) : handlerManager;
 	}
 
-	private final <H extends EventHandler> HandlerRegistration addHandler(final H handler, GwtEvent.Type<H> type) {
+	protected final <H extends EventHandler> HandlerRegistration addHandler(final H handler, GwtEvent.Type<H> type) {
 		return ensureHandlers().addHandler(type, handler);
 	}
 
@@ -161,6 +171,10 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 
 		public native static NativeNotification create(String title, JavaScriptObject options)/*-{
 			return new $wnd.Notification(title, options);
+		}-*/;
+		
+		public native static boolean isSupported()/*-{
+			return (typeof(Notification) == "function" && typeof(Notification.prototype) == "object");
 		}-*/;
 
 		public native static void requestPermission(NotificationPermissionCallback callback)/*-{
