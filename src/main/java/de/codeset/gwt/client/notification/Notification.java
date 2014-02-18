@@ -179,9 +179,11 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 
 		public native static void requestPermission(NotificationPermissionCallback callback)/*-{
 			$wnd.Notification.requestPermission(function(permission) {
-						var perm = @de.codeset.gwt.client.notification.NotificationPermission::fromString(Ljava/lang/String;)(permission);
-						callback.@de.codeset.gwt.client.notification.Notification.NotificationPermissionCallback::call(Lde/codeset/gwt/client/notification/NotificationPermission;)(perm);
-					});
+				if(callback != null){
+					var perm = @de.codeset.gwt.client.notification.NotificationPermission::fromString(Ljava/lang/String;)(permission);
+					callback.@de.codeset.gwt.client.notification.Notification.NotificationPermissionCallback::call(Lde/codeset/gwt/client/notification/NotificationPermission;)(perm);
+				}	
+			});
 		}-*/;
 
 		public native final static String getPermission()/*-{
@@ -193,7 +195,11 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 		}-*/;
 
 		public native final void addEventListener(String event, Callback callback)/*-{
-			this.addEventListener(event, function() {callback.@de.codeset.gwt.client.notification.Notification.Callback::call()();});
+			this.addEventListener(event, function() {
+				if(callback != null){
+					callback.@de.codeset.gwt.client.notification.Notification.Callback::call()();
+				}
+			});
 		}-*/;
 
 	}
