@@ -1,4 +1,4 @@
-package de.codeset.gwt.client.notification.eventing.click;
+package de.codeset.gwt.notification.api.client.eventing.click;
 
 import com.google.gwt.event.shared.GwtEvent;
 

@@ -1,4 +1,4 @@
-package de.codeset.gwt.client.notification;
+package de.codeset.gwt.notification.api.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.shared.EventHandler;
@@ -6,18 +6,18 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
 
-import de.codeset.gwt.client.notification.eventing.click.HasNotificationClickHandlers;
-import de.codeset.gwt.client.notification.eventing.click.NotificationClickEvent;
-import de.codeset.gwt.client.notification.eventing.click.NotificationClickHandler;
-import de.codeset.gwt.client.notification.eventing.close.HasNotificationCloseHandlers;
-import de.codeset.gwt.client.notification.eventing.close.NotificationCloseEvent;
-import de.codeset.gwt.client.notification.eventing.close.NotificationCloseHandler;
-import de.codeset.gwt.client.notification.eventing.error.HasNotificationErrorHandlers;
-import de.codeset.gwt.client.notification.eventing.error.NotificationErrorEvent;
-import de.codeset.gwt.client.notification.eventing.error.NotificationErrorHandler;
-import de.codeset.gwt.client.notification.eventing.show.HasNotificationShowHandlers;
-import de.codeset.gwt.client.notification.eventing.show.NotificationShowEvent;
-import de.codeset.gwt.client.notification.eventing.show.NotificationShowHandler;
+import de.codeset.gwt.notification.api.client.eventing.click.HasNotificationClickHandlers;
+import de.codeset.gwt.notification.api.client.eventing.click.NotificationClickEvent;
+import de.codeset.gwt.notification.api.client.eventing.click.NotificationClickHandler;
+import de.codeset.gwt.notification.api.client.eventing.close.HasNotificationCloseHandlers;
+import de.codeset.gwt.notification.api.client.eventing.close.NotificationCloseEvent;
+import de.codeset.gwt.notification.api.client.eventing.close.NotificationCloseHandler;
+import de.codeset.gwt.notification.api.client.eventing.error.HasNotificationErrorHandlers;
+import de.codeset.gwt.notification.api.client.eventing.error.NotificationErrorEvent;
+import de.codeset.gwt.notification.api.client.eventing.error.NotificationErrorHandler;
+import de.codeset.gwt.notification.api.client.eventing.show.HasNotificationShowHandlers;
+import de.codeset.gwt.notification.api.client.eventing.show.NotificationShowEvent;
+import de.codeset.gwt.notification.api.client.eventing.show.NotificationShowHandler;
 
 /**
  * @author MarZl 
@@ -180,8 +180,8 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 		public native static void requestPermission(NotificationPermissionCallback callback)/*-{
 			$wnd.Notification.requestPermission(function(permission) {
 				if(callback != null){
-					var perm = @de.codeset.gwt.client.notification.NotificationPermission::fromString(Ljava/lang/String;)(permission);
-					callback.@de.codeset.gwt.client.notification.Notification.NotificationPermissionCallback::call(Lde/codeset/gwt/client/notification/NotificationPermission;)(perm);
+					var perm = @de.codeset.gwt.notification.api.client.NotificationPermission::fromString(Ljava/lang/String;)(permission);
+					callback.@de.codeset.gwt.notification.api.client.Notification.NotificationPermissionCallback::call(Lde/codeset/gwt/notification/api/client/NotificationPermission;)(perm);
 				}	
 			});
 		}-*/;
@@ -197,7 +197,7 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 		public native final void addEventListener(String event, Callback callback)/*-{
 			this.addEventListener(event, function() {
 				if(callback != null){
-					callback.@de.codeset.gwt.client.notification.Notification.Callback::call()();
+					callback.@de.codeset.gwt.notification.api.client.Notification.Callback::call()();
 				}
 			});
 		}-*/;

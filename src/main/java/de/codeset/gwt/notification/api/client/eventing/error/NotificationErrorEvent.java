@@ -1,4 +1,4 @@
-package de.codeset.gwt.client.notification.eventing.error;
+package de.codeset.gwt.notification.api.client.eventing.error;
 
 import com.google.gwt.event.shared.GwtEvent;
 

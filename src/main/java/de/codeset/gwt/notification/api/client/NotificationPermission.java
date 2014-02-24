@@ -1,4 +1,4 @@
-package de.codeset.gwt.client.notification;
+package de.codeset.gwt.notification.api.client;
 
 /**
  * @author MarZl 

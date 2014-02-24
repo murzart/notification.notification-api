@@ -3,5 +3,5 @@
 
 	<inherits name="com.google.gwt.event.Event" />
 
-	<source path='client' />
+	<source path='api/client' />
 </module>

@@ -1,4 +1,4 @@
-package de.codeset.gwt.client.notification.eventing.close;
+package de.codeset.gwt.notification.api.client.eventing.close;
 
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;

@@ -1,4 +1,4 @@
-package de.codeset.gwt.client.notification.eventing.show;
+package de.codeset.gwt.notification.api.client.eventing.show;
 
 import com.google.gwt.event.shared.GwtEvent;
 
