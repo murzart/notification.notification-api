@@ -3,7 +3,7 @@ package de.codeset.gwt.notification.api.client.eventing.error;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * @author MarZl 
+ * @author Marcel Konopka
  *
  * @see <a href="https://github.com/MarZl/notification-api">https://github.com/MarZl/notification-api</a>
  * 

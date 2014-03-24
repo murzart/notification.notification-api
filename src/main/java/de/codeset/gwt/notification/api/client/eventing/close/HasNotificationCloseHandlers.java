@@ -4,7 +4,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
 /**
- * @author MarZl 
+ * @author Marcel Konopka
  *
  * @see <a href="https://github.com/MarZl/notification-api">https://github.com/MarZl/notification-api</a>
  * 

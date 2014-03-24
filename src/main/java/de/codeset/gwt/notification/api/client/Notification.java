@@ -20,7 +20,7 @@ import de.codeset.gwt.notification.api.client.eventing.show.NotificationShowEven
 import de.codeset.gwt.notification.api.client.eventing.show.NotificationShowHandler;
 
 /**
- * @author MarZl 
+ * @author Marcel Konopka 
  *
  * @see <a href="https://github.com/MarZl/notification-api">https://github.com/MarZl/notification-api</a>
  * 

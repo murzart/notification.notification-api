@@ -1,7 +1,7 @@
 package de.codeset.gwt.notification.api.client;
 
 /**
- * @author MarZl 
+ * @author Marcel Konopka 
  *
  * @see <a href="https://github.com/MarZl/notification-api">https://github.com/MarZl/notification-api</a>
  * 
