@@ -2,6 +2,8 @@ package de.codeset.gwt.notification.api.client.eventing.show;
 
 import com.google.gwt.event.shared.GwtEvent;
 
+import de.codeset.gwt.notification.api.client.Notification;
+
 /**
  * @author Marcel Konopka
  *
@@ -12,6 +14,12 @@ public class NotificationShowEvent extends GwtEvent<NotificationShowHandler> {
 
 	private static final Type<NotificationShowHandler> TYPE = new Type<NotificationShowHandler>();
 
+	private Notification notification;
+
+	public NotificationShowEvent(Notification notification) {
+		this.notification = notification;
+	}
+
 	public static Type<NotificationShowHandler> getType() {
 		return TYPE;
 	}
@@ -19,6 +27,14 @@ public class NotificationShowEvent extends GwtEvent<NotificationShowHandler> {
 	@Override
 	public Type<NotificationShowHandler> getAssociatedType() {
 		return TYPE;
+	}
+
+	public Notification getNotification() {
+		return notification;
+	}
+
+	public void setNotification(Notification notification) {
+		this.notification = notification;
 	}
 
 	@Override

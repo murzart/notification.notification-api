@@ -31,9 +31,8 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 	private HandlerManager handlerManager;
 	private boolean initHandlers;
 
-
 	private Notification(String title, NotificationOptions options) {
-		nativeNotification = NativeNotification.create(title, options);
+		nativeNotification = NativeNotification.create(this, title, options);
 	}
 	
 	/**
@@ -83,6 +82,91 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 		return NotificationPermission.fromString(NativeNotification.getPermission());
 	}
 
+	
+	/**
+	 * The title of the notification as specified in the options parameter of the constructor.
+	 * 
+	 * @return title
+	 */
+	public String getTitle() {
+		return nativeNotification.getTitle();
+	}
+	
+	/**
+	 * The text direction of the notification as specified in the options parameter of the constructor.
+	 * 
+	 * @return dir
+	 */
+	public String getDir() {
+		return nativeNotification.getDir();
+	}
+	
+	
+	/**
+	 * The language code of the notification as specified in the options parameter of the constructor.
+	 * 
+	 * @return lang
+	 */
+	public String getLang() {
+		return nativeNotification.getLang();
+	}
+	
+	/**
+	 * The body string of the notification as specified in the options parameter of the constructor.
+	 * 
+	 * @return
+	 */
+	public String getBody() {
+		return nativeNotification.getBody();
+	}
+	
+	
+	/**
+	 * The ID of the notification (if any) as specified in the options parameter of the constructor.
+	 * 
+	 * @return
+	 */
+	public String getTag() {
+		return nativeNotification.getTag();
+	}
+	
+	/**
+	 * The URL of the image used as an icon of the notification as specified in the options parameter of the constructor.
+	 * 
+	 * @return icon
+	 */
+	public String getIcon() {
+		return nativeNotification.getIcon();
+	}
+		
+	
+	/**
+	 * Returns a structured clone of the notification’s data.
+	 * 
+	 * @return data
+	 */
+	public String getData() {
+		return nativeNotification.getData();
+	}
+	
+	/**
+	 * A Boolean indicating that on devices with sufficiently large screens, a notification should remain active until the user clicks or dismisses it.
+	 * 
+	 * @return requireInteraction
+	 */
+	public boolean isInteractionRequired() {
+		return nativeNotification.getRequireInteraction();
+	}
+	
+	/**
+	 * Specifies whether the notification should be silent, i.e. no sounds or vibrations should be issued, regardless of the device settings.
+	 * 
+	 * @return silent
+	 */
+	public boolean isSilent() {
+		return nativeNotification.getSilent();
+	}
+	
 	/**
 	 * This method allows to programmatically close a notification.
 	 */
@@ -122,11 +206,13 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 	}
 
 	@Override
+	@Deprecated
 	public HandlerRegistration addCloseHandler(NotificationCloseHandler handler) {
 		return addHandler(handler, NotificationCloseEvent.getType());
 	}
 
 	@Override
+	@Deprecated
 	public HandlerRegistration addShowHandler(NotificationShowHandler handler) {
 		return addHandler(handler, NotificationShowEvent.getType());
 	}
@@ -137,29 +223,29 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 		nativeNotification.addEventListener("close", new Callback() {
 
 			@Override
-			public void call() {
-				fireEvent(new NotificationCloseEvent());
+			public void call(Notification notification) {
+				fireEvent(new NotificationCloseEvent(notification));
 			}
 		});
 		nativeNotification.addEventListener("click", new Callback() {
 
 			@Override
-			public void call() {
-				fireEvent(new NotificationClickEvent());
+			public void call(Notification notification) {
+				fireEvent(new NotificationClickEvent(notification));
 			}
 		});
 		nativeNotification.addEventListener("error", new Callback() {
 
 			@Override
-			public void call() {
-				fireEvent(new NotificationErrorEvent());
+			public void call(Notification notification) {
+				fireEvent(new NotificationErrorEvent(notification));
 			}
 		});
 		nativeNotification.addEventListener("show", new Callback() {
 
 			@Override
-			public void call() {
-				fireEvent(new NotificationShowEvent());
+			public void call(Notification notification) {
+				fireEvent(new NotificationShowEvent(notification));
 			}
 		});
 	}
@@ -169,8 +255,10 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 		protected NativeNotification() {
 		}
 
-		public native static NativeNotification create(String title, JavaScriptObject options)/*-{
-			return new $wnd.Notification(title, options);
+		public native static NativeNotification create(Notification notification, String title, JavaScriptObject options)/*-{
+			nativeNotification = new $wnd.Notification(title, options);
+			nativeNotification.gwtNotification = notification;
+			return nativeNotification;
 		}-*/;
 		
 		public native static boolean isSupported()/*-{
@@ -190,6 +278,42 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 			return $wnd.Notification.permission;
 		}-*/;
 
+		public native final String getTitle() /*-{
+			return this.title;
+		}-*/;
+		
+		public native final String getDir() /*-{
+			return this.dir;
+		}-*/;
+		
+		public native final String getLang() /*-{
+			return this.lang;
+		}-*/;
+		
+		public native final String getBody() /*-{
+			return this.body;
+		}-*/;
+		
+		public native final String getTag() /*-{
+			return this.tag;
+		}-*/;
+		
+		public native final String getIcon() /*-{
+			return this.icon;
+		}-*/;
+
+		public native final String getData() /*-{
+			return this.data;
+		}-*/;
+
+		public native final boolean getRequireInteraction() /*-{
+			return this.requireInteraction;
+		}-*/;
+		
+		public native final boolean getSilent() /*-{
+			return this.silent;
+		}-*/;
+
 		public native final void close()/*-{
 			this.close();
 		}-*/;
@@ -197,11 +321,10 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 		public native final void addEventListener(String event, Callback callback)/*-{
 			this.addEventListener(event, function() {
 				if(callback != null){
-					callback.@de.codeset.gwt.notification.api.client.Notification.Callback::call()();
+					callback.@de.codeset.gwt.notification.api.client.Notification.Callback::call(Lde/codeset/gwt/notification/api/client/Notification;)(this.gwtNotification);
 				}
 			});
 		}-*/;
-
 	}
 
 	public static class NotificationOptions extends JavaScriptObject {
@@ -267,7 +390,6 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 			this.dir = dir;
 			return this;
 		}-*/;
-
 	}
 
 	public static interface NotificationPermissionCallback {
@@ -277,7 +399,6 @@ public class Notification implements HasNotificationClickHandlers, HasNotificati
 
 	protected static interface Callback {
 
-		void call();
+		void call(Notification notification);
 	}
-
 }
